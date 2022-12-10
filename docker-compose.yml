@@ -12,10 +12,8 @@ services:
         volumes:
             - odoo-data:/var/lib/odoo
             - ./volumes/odoo/addons:/mnt/extra-addons
-            - ./volumes/odoo/config:/etc/odoo
     postgres:
         image: postgres:13-alpine
-        container_name: odoo-postgres-new
         env_file: .env
         ports:
           - "5433:5432"
