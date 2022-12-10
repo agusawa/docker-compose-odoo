@@ -1,0 +1,26 @@
+version: "3.7"
+services:
+    odoo:
+        image: odoo:16.0
+        platform: linux/amd64
+        container_name: odoo-new
+        env_file: .env
+        depends_on:
+            - postgres
+        ports:
+            - "8070:8069"
+        volumes:
+            - odoo-data:/var/lib/odoo
+            - ./volumes/odoo/addons:/mnt/extra-addons
+            - ./volumes/odoo/config:/etc/odoo
+    postgres:
+        image: postgres:13-alpine
+        container_name: odoo-postgres-new
+        env_file: .env
+        ports:
+          - "5433:5432"
+        volumes:
+            - odoo-pg-data:/var/lib/postgresql/data/pgdata
+volumes:
+    odoo-data:
+    odoo-pg-data:
